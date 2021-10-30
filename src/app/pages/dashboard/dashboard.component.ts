@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CountriesService } from 'src/app/core/services/countries.service';
 
@@ -11,7 +12,7 @@ export class DashboardComponent implements OnInit {
   populationTitle: string = "Top 10 Population By Country";
   regionTitle : string = "Regions";
   searchTitle : string = "Quick Search";
-  searchPlaceholder:string = " Search ..." ;
+  searchPlaceholder:string = " Search Country Name ..." ;
 
   top10PopulationList:any[] = [];
   countryRegionGroup : {region : string , amount : number , countries : any[] }[]= [];
@@ -23,7 +24,8 @@ export class DashboardComponent implements OnInit {
   ];
 
   constructor(
-    private countriesService: CountriesService
+    private countriesService: CountriesService ,
+    private router : Router
   ) { }
 
   ngOnInit(): void {
@@ -57,6 +59,15 @@ export class DashboardComponent implements OnInit {
         });
       }
     });
+  }
+
+  onSearch(value : string , property : string){
+    if(value){
+      let param : any = {} ;
+      param[property] = value;
+       
+      this.router.navigate(['/information'] , { queryParams : param });
+    }
   }
 
   getImagePath(index: number) {

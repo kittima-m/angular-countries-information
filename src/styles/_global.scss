@@ -1,0 +1,19 @@
+div.data-not-found{
+    background-color: #FFFFFF;
+    height: 80px;
+}
+
+img.medal {
+    width: 20px;
+    height: 20px;
+    margin-left:5px;
+}
+
+.clickable{
+    color: #007bff;
+    font-weight: 700;
+    cursor: pointer;
+    &:hover{
+      text-decoration: underline;
+    }
+}

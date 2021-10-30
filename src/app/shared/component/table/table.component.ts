@@ -13,6 +13,7 @@ export class TableComponent implements OnInit , OnChanges {
   @Input() countriesList : any[] = [];
   @Input() sortActive: string = "";
   @Input() sortDirection: string = "";
+  
   displayedColumns: string[] = ['name', 'population' , 'region'];
   dataSource = new MatTableDataSource();
 
@@ -31,8 +32,8 @@ export class TableComponent implements OnInit , OnChanges {
   constructor(private constants : Constants) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('changes :' , changes)
     if(changes.countriesList){
+      this.isDataNotFound = this.countriesList.length == 0 ? true : false ;
       this.dataSource = new MatTableDataSource(this.countriesList);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

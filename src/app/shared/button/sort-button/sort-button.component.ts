@@ -24,7 +24,6 @@ export class SortButtonComponent implements OnInit {
       this.countriesList.sort((obj1, obj2) =>
         obj1[this.columnCode] - obj2[this.columnCode]
       ).map(sorted => {
-        console.log(sorted);
       });
       this.sorted.isAsc = true;
     }
