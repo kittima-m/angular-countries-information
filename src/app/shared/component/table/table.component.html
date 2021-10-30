@@ -1,0 +1,56 @@
+<div>
+    <mat-table mat-table matSort matSortDisableClear #table 
+    [dataSource]="dataSource"  
+    [matSortActive]="sortActive" 
+ >
+
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="name"> 
+            <span>Country</span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row" >
+            <img [src]="row.flag" alt="" height="50px" width="80px" class="mx-2">
+            <div class="d-flex flex-column justify-content-start">
+                <div class="font-weight-bold">{{ row.name }}</div>
+                <div>Capital : {{ row.capital || '-' }} </div>
+            </div>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="population">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="population"> 
+            <span>Population</span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <span >{{ row.population | number }}</span>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="region">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="region"> 
+            <span>Region</span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <!-- <div class="d-flex flex-column justify-content-start"> -->
+                <div>{{ row.region }}</div>
+                <!-- <div><p class="font-weight-lighter">Time zone : {{ row.timezones[0] }} </p></div> -->
+            <!-- </div> -->
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="py-2"></mat-row>
+
+    </mat-table>
+</div>
+<div *ngIf="isDataNotFound" class="d-flex">
+    <span> {{ dataNotFoundMessage }}</span>
+</div>
+<div>
+    <mat-paginator #paginator showFirstLastButtons
+    [pageSizeOptions]="pageSizeOptions"
+    [length]="resultsLength" 
+    [pageSize]="pageSize" 
+    [pageIndex]="pageIndex">
+    </mat-paginator>
+</div>
