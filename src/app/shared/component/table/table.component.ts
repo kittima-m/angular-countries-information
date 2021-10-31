@@ -44,5 +44,8 @@ export class TableComponent implements OnInit , OnChanges {
   
   }
 
+  trackByFn(index : number, item : Country) {
+    return index;
+  }
 }
  

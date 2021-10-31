@@ -1,6 +1,7 @@
 <div>
     <mat-table mat-table matSort matSortDisableClear #table 
     [dataSource]="dataSource"  
+    [trackBy]="trackByFn"
  >
 
     <ng-container matColumnDef="name">
