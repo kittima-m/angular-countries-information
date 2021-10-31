@@ -1,7 +1,6 @@
 <div>
     <mat-table mat-table matSort matSortDisableClear #table 
     [dataSource]="dataSource"  
-    [matSortActive]="sortActive" 
  >
 
     <ng-container matColumnDef="name">
@@ -11,6 +10,7 @@
         <mat-cell *matCellDef="let row" >
             <img [src]="row.flag" alt="" height="50px" width="80px" class="mx-2">
             <div class="d-flex flex-column justify-content-start">
+                <span class="mobile-label">Country</span>
                 <div class="font-weight-bold">{{ row.name }}</div>
                 <div>Capital : {{ row.capital || '-' }} </div>
             </div>
@@ -22,7 +22,8 @@
             <span>Population</span>
         </mat-header-cell>
         <mat-cell *matCellDef="let row">
-            <span >{{ row.population | number }}</span>
+            <span class="mobile-label">Population</span>
+            <span>{{ row.population | number }}</span>
         </mat-cell>
     </ng-container>
 
@@ -31,10 +32,8 @@
             <span>Region</span>
         </mat-header-cell>
         <mat-cell *matCellDef="let row">
-            <!-- <div class="d-flex flex-column justify-content-start"> -->
-                <div>{{ row.region }}</div>
-                <!-- <div><p class="font-weight-lighter">Time zone : {{ row.timezones[0] }} </p></div> -->
-            <!-- </div> -->
+            <span class="mobile-label">Region</span>
+            <div>{{ row.region }}</div>
         </mat-cell>
     </ng-container>
 

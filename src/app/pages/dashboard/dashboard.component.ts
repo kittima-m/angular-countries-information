@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Country } from 'src/app/core/models/country.model';
+import { RegionGroup } from 'src/app/core/models/region-group.model';
+import { Table } from 'src/app/core/models/table.model';
 import { CountriesService } from 'src/app/core/services/countries.service';
 
 @Component({
@@ -14,10 +17,10 @@ export class DashboardComponent implements OnInit {
   searchTitle : string = "Quick Search";
   searchPlaceholder:string = " Search Country Name ..." ;
 
-  top10PopulationList:any[] = [];
-  countryRegionGroup : {region : string , amount : number , countries : any[] }[]= [];
+  top10PopulationList: Country[] = [];
+  countryRegionGroup : RegionGroup[] = [];
   countryList : string[] = [];
-  columnTop10Table = [
+  columnTop10Table : Table[] = [
     { code: 'index', name: '#', type: 'index' },
     { code: 'name', name: 'Country Name', type: 'string' },
     { code: 'population', name: 'Population', type: 'number' }
@@ -32,10 +35,10 @@ export class DashboardComponent implements OnInit {
     this.countriesService.getAllCountries().then((response) => {
       if (response) {
         this.getCountryRegionGroup(response).then(() => {
-          this.countryRegionGroup.sort((c1, c2) => c2['amount'] - c1['amount'])
+          this.countryRegionGroup.sort((c1, c2) => c2.amount - c1.amount)
         });
 
-        response.sort((c1, c2) => c2['population'] - c1['population'])
+        response.sort((c1, c2) => c2.population - c1.population)
           .slice(0, 10)
           .map(value => {
             this.top10PopulationList.push(value);
@@ -44,18 +47,16 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  private async getCountryRegionGroup(response : any){
-    await response.forEach((data:any) => {
+  private async getCountryRegionGroup(response : Country[]){
+    await response.forEach((data:Country) => {
       this.countryList.push(data.name);
-      let foundRegion = this.countryRegionGroup.find(value => value['region'] == data['region']) ?? null;
+      let foundRegion = this.countryRegionGroup.find(value => value.region == data.region) ?? null;
       if(foundRegion){
         foundRegion.amount = foundRegion.amount + 1;
-        foundRegion.countries.push(data);
       } else {
         this.countryRegionGroup.push({
-          region : data['region'],
-          amount : 1 ,
-          countries : [data]
+          region : data.region,
+          amount : 1 
         });
       }
     });
@@ -65,7 +66,6 @@ export class DashboardComponent implements OnInit {
     if(value){
       let param : any = {} ;
       param[property] = value;
-       
       this.router.navigate(['/information'] , { queryParams : param });
     }
   }
@@ -88,4 +88,11 @@ export class DashboardComponent implements OnInit {
     return [0,1,2].indexOf(index) > -1 ? true : false; 
   }
 
+  getValue(country : Country , property : string){
+    return country[property as keyof Country];
+  }
+
+  getRegionAmount(amount : number){
+    return ` (${amount} Countries)`;
+  }
 }

@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { Country } from 'src/app/core/models/country.model';
 import { Constants } from '../../constants/constants';
 
 @Component({
@@ -10,12 +11,11 @@ import { Constants } from '../../constants/constants';
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit , OnChanges {
-  @Input() countriesList : any[] = [];
-  @Input() sortActive: string = "";
+  @Input() countriesList : Country[] = [];
   @Input() sortDirection: string = "";
   
-  displayedColumns: string[] = ['name', 'population' , 'region'];
-  dataSource = new MatTableDataSource();
+  displayedColumns: string[] = ['name', 'population', 'region'];
+  dataSource = new MatTableDataSource<Country>();
 
   //paginator
   pageSize = 10;

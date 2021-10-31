@@ -1,8 +1,11 @@
-<!-- <div class="row px-3 d-flex">
-    <input class="form-control" placeholder="Country Name" >
-    <input class="form-control" placeholder="Country Name">
-</div> -->
+<div>
+    <form [formGroup]="searchForm" class="column px-3 d-flex col-12">
+            <input class="form-control mr-2" placeholder="Country Name" formControlName="name" >
+            <input class="form-control mr-2" placeholder="Population" formControlName="population" type="number">
+            <input class="form-control" placeholder="Region" formControlName="region">
+    </form>
+</div>
 
-
-<app-table [countriesList]="countriesList" [sortActive]="sortActive">
+<app-table 
+    [countriesList]="filteredList" >
 </app-table>
