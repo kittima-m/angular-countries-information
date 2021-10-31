@@ -3,9 +3,9 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Country } from 'src/app/core/models/country.model';
-import { Table } from 'src/app/core/models/table.model';
-import { CountriesService } from 'src/app/core/services/countries.service';
+import { Country } from '@core/models/country.model';
+import { Table } from '@core/models/table.model';
+import { CountriesService } from '@core/services/countries.service';
 
 @Component({
   selector: 'app-list',
