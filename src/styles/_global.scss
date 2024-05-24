@@ -1,0 +1,42 @@
+div.data-not-found{
+    background-color: #FFFFFF;
+    height: 80px;
+}
+
+img.medal {
+    width: 20px;
+    height: 20px;
+    margin-left:5px;
+}
+
+.clickable{
+    color: #007bff;
+    font-weight: 700;
+    cursor: pointer;
+    &:hover{
+      text-decoration: underline;
+    }
+}
+
+span.mobile-label{
+    display: none;
+}
+
+@media(max-width: 600px) {
+    span.mobile-label {
+      width: 80px;
+      display: inline-block;
+          font-weight: bold;
+    }
+  
+    .mat-header-row {
+      display: none;
+    }
+  
+    .mat-row { 
+      flex-direction: column;
+      align-items: start;
+      padding: 8px 24px;
+    }
+  }
+  
